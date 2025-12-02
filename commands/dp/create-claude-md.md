@@ -25,6 +25,7 @@ pwd
 **If current directory is BELOW the repo root:**
 → You are creating a SUBDIRECTORY CLAUDE.md (package/app-specific, additive to root)
 → Read the root CLAUDE.md first to avoid duplication
+→ After creating, offer to update root CLAUDE.md with a reference to this new file
 
 ## Before Writing Anything
 
@@ -118,6 +119,10 @@ Reference external docs instead of embedding:
 
 ## Docs
 - `agent_docs/topic.md` — when to read
+
+## Package Docs
+Subdirectories with their own CLAUDE.md:
+- `path/to/package/` — brief description
 ```
 
 Target: 60-100 lines, comprehensive but lean.
@@ -153,6 +158,25 @@ Target: 30-50 lines maximum. This is ADDITIVE to root — don't repeat anything 
 5. For root: list any `agent_docs/` files that should be created with brief descriptions
 6. For subdirectory: explicitly note what you're NOT including because it's in root
 7. For updates: explicitly state what to remove and why
+8. **For subdirectory (new file): update root CLAUDE.md's "Package Docs" section**
+
+## Updating Root CLAUDE.md (Subdirectory Only)
+
+After creating a subdirectory CLAUDE.md, check the root CLAUDE.md:
+
+1. **If "Package Docs" section exists:**
+   - Check if this subdirectory is already listed
+   - If not, add an entry: `- \`path/\` — brief description`
+
+2. **If "Package Docs" section does NOT exist:**
+   - Add the section before the end of the file:
+   ```markdown
+   ## Package Docs
+   Subdirectories with their own CLAUDE.md:
+   - `current/path/` — brief description of what this package does
+   ```
+
+3. **Present the diff** for root CLAUDE.md and ask for confirmation before writing
 
 ## Final Checklist
 
