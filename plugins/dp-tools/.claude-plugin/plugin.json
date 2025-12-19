@@ -1,0 +1,11 @@
+{
+  "name": "dp-tools",
+  "version": "1.0.0",
+  "description": "Tools for creating CLAUDE.md files and Claude Code rules",
+  "author": {
+    "name": "Dariusz Parys",
+    "url": "https://github.com/dariuszparys"
+  },
+  "license": "MIT",
+  "keywords": ["claude-md", "rules", "project-setup", "onboarding"]
+}

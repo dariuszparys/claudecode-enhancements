@@ -1,61 +1,247 @@
 # claudecode-enhancements
 
-Custom slash commands and hooks for [Claude Code](https://docs.anthropic.com/en/docs/claude-code).
+A Claude Code plugin marketplace with custom commands, skills, and hooks.
 
 ## Installation
 
-Symlink the commands directory to your Claude Code configuration:
-
 ```bash
-ln -s /path/to/claudecode-enhancements/commands ~/.claude/commands
+# Add this repo as a marketplace
+/plugin marketplace add dariuszparys/claudecode-enhancements
+
+# List available plugins
+/plugin
+
+# Install the plugins you want
+/plugin install work-items      # Platform-agnostic work item tools
+/plugin install azure-boards    # Azure DevOps integration (requires setup)
+/plugin install dp-tools        # CLAUDE.md and rules generators
+/plugin install adr             # Architecture Decision Records tooling
 ```
 
-Or copy individual command namespaces:
+## Available Plugins
 
-```bash
-cp -r commands/dp ~/.claude/commands/
+| Plugin | Description |
+|--------|-------------|
+| `work-items` | Analyze, optimize, and break down work items for LLM-assisted development |
+| `azure-boards` | Azure DevOps Boards integration with `az boards` CLI |
+| `dp-tools` | Tools for creating CLAUDE.md files and Claude Code rules |
+| `adr` | Architecture Decision Records: create ADRs, suggest documenting decisions, auto-lint and regenerate index |
+
+---
+
+## Plugin: work-items
+
+Platform-agnostic tools for analyzing, optimizing, and breaking down work items.
+
+### Commands
+
+| Command | Description |
+|---------|-------------|
+| `/work-items:analyze` | Check if a work item is ready for development |
+| `/work-items:optimize` | Transform work items into token-efficient LLM format |
+| `/work-items:tasks` | Generate implementation task breakdown |
+
+### Skills (Auto-invoked)
+
+| Skill | Description |
+|-------|-------------|
+| `work-items` | Platform-agnostic optimization patterns for any issue tracker |
+
+### Example Usage
+
+```
+# Analyze a work item for completeness
+/work-items:analyze https://github.com/org/repo/issues/123
+
+# Optimize for LLM context
+/work-items:optimize
+
+# Generate tasks from a work item
+/work-items:tasks 12345
 ```
 
-To use the hooks, copy `settings.json` to your project:
+---
+
+## Plugin: azure-boards
+
+Azure DevOps Boards integration for working with PBIs, Bugs, and Tasks.
+
+> **Note:** This plugin requires setup. See [plugins/azure-boards/README.md](plugins/azure-boards/README.md) for prerequisites.
+
+### Prerequisites
+
+- Azure CLI installed
+- Azure DevOps CLI extension (`az extension add --name azure-devops`)
+- Personal Access Token (PAT) with Work Items: Read & Write scope
+- Default organization and project configured
+
+### Skills (Auto-invoked)
+
+| Skill | Description |
+|-------|-------------|
+| `azure-boards` | Azure DevOps-specific with `az boards` CLI integration |
+
+### Quick Setup
 
 ```bash
-cp settings.json /path/to/your/project/.claude/settings.json
+# Install Azure DevOps extension
+az extension add --name azure-devops
+
+# Configure defaults
+az devops configure --defaults \
+  organization=https://dev.azure.com/<your-org> \
+  project=<your-project>
+
+# Authenticate (choose one)
+export AZURE_DEVOPS_EXT_PAT=<your-pat>
+# or
+az login
 ```
 
-## Command: `/dp:create-claude-md`
+### Example Usage
 
-Generates or updates a `CLAUDE.md` file following best practices for AI agent onboarding.
+Once configured, Claude will automatically use Azure Boards commands:
 
-**What it does:**
+```
+User: "Show me PBI 12345"
+Claude: [Uses az boards work-item show --id 12345]
+
+User: "What's assigned to me in Sprint 3?"
+Claude: [Uses az boards query with WIQL]
+```
+
+---
+
+## Plugin: dp-tools
+
+Tools for creating CLAUDE.md files and Claude Code rules.
+
+### Commands
+
+| Command | Description |
+|---------|-------------|
+| `/dp:create-claude-md` | Generate or update CLAUDE.md for AI agent onboarding |
+| `/dp:create-rules` | Create modular rules files in `.claude/rules/` |
+
+### `/dp:create-claude-md`
+
+Generates or updates a `CLAUDE.md` file following best practices.
 
 - Auto-detects context (repo root vs subdirectory)
 - Explores directory structure and existing documentation
-- Generates concise, actionable CLAUDE.md content
 - Root files: 60-100 lines covering stack, commands, structure, rules, domain
 - Subdirectory files: 30-50 lines with package-specific additions only
 
-**Usage:**
+### `/dp:create-rules`
+
+Creates modular Claude Code rules files for larger projects.
+
+| Use Case | Approach |
+|----------|----------|
+| Project overview, stack, commands | Use `/dp:create-claude-md` |
+| Path-specific conventions (API, tests) | Use `/dp:create-rules` |
+| Large project with many conventions | Use `/dp:create-rules` |
+
+Example output:
+```
+.claude/
+├── CLAUDE.md           # Main project memory
+└── rules/
+    ├── typescript.md   # Language conventions
+    ├── testing.md      # Testing standards
+    └── api.md          # API-specific (paths: src/api/**)
+```
+
+---
+
+## Plugin: adr
+
+Architecture Decision Records tooling. Create ADRs with MADR template, get suggestions for documenting decisions, and automatically lint and regenerate index.
+
+> **Note:** Hooks require project-level dependencies. See [plugins/adr/README.md](plugins/adr/README.md) for setup.
+
+### Commands
+
+| Command | Description |
+|---------|-------------|
+| `/adr:create` | Create a new ADR using the MADR template |
+
+### Skills (Auto-invoked)
+
+| Skill | Description |
+|-------|-------------|
+| `adr` | Suggests documenting significant architectural decisions as ADRs |
+
+### Hooks (Auto-activated)
+
+| Hook | Trigger | Action |
+|------|---------|--------|
+| ADR Linting | `docs/adr/*.md` | Auto-fix markdown, block on errors |
+| ADR Log | `docs/adr/NNNN-*.md` | Regenerate ADR index |
+
+### Prerequisites for Hooks
+
+Add to your project's `package.json`:
+
+```json
+{
+  "devDependencies": {
+    "adr-log": "^2.2.0",
+    "markdownlint-cli": "^0.47.0"
+  }
+}
+```
+
+### Example
 
 ```
-/dp:create-claude-md
+# Create a new ADR
+/adr:create
+
+# When Claude detects an architectural decision:
+Claude: "This introduces a new caching layer. Consider documenting this with /adr:create"
+
+# After editing ADR files, hooks run automatically:
+# Hook 1: markdownlint --fix
+# Hook 2: adr-log regenerates index
 ```
 
-## Hook: ADR Markdown Linting
+---
 
-A `PostToolUse` hook that enforces markdown standards on Architecture Decision Records.
+## Repository Structure
 
-**Behavior:**
-
-- Triggers on `Edit` or `Write` operations
-- Only affects files matching `docs/adr/*.md`
-- Auto-fixes issues with `markdownlint --fix`
-- Blocks the operation if unfixable lint errors remain
-
-## Prerequisites
-
-The ADR linting hook requires:
-
-| Tool | Install |
-|------|---------|
-| `markdownlint-cli` | `npm install -g markdownlint-cli` |
-| `jq` | `brew install jq` or `apt-get install jq` |
+```
+claudecode-enhancements/
+├── .claude-plugin/
+│   └── marketplace.json       # Lists available plugins
+├── plugins/
+│   ├── work-items/            # Platform-agnostic work item tools
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json
+│   │   ├── commands/
+│   │   │   └── work-items/
+│   │   ├── skills/
+│   │   │   └── work-items/
+│   │   └── README.md
+│   ├── azure-boards/          # Azure DevOps integration
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json
+│   │   ├── skills/
+│   │   │   └── azure-boards/
+│   │   └── README.md
+│   ├── dp-tools/              # CLAUDE.md and rules tools
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json
+│   │   ├── commands/
+│   │   │   └── dp/
+│   │   └── README.md
+│   └── adr/                   # ADR tooling with hooks
+│       ├── .claude-plugin/
+│       │   └── plugin.json
+│       ├── commands/
+│       │   └── adr/
+│       ├── skills/
+│       │   └── adr/
+│       └── README.md
+└── README.md
+```

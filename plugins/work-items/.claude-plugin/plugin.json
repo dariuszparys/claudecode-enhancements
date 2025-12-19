@@ -1,0 +1,11 @@
+{
+  "name": "work-items",
+  "version": "1.0.0",
+  "description": "Analyze, optimize, and break down work items for LLM-assisted development",
+  "author": {
+    "name": "Dariusz Parys",
+    "url": "https://github.com/dariuszparys"
+  },
+  "license": "MIT",
+  "keywords": ["work-items", "issues", "tickets", "llm", "optimization", "azure-devops"]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "azure-boards",
+  "version": "1.0.0",
+  "description": "Azure DevOps Boards integration with az boards CLI for work item management",
+  "author": {
+    "name": "Dariusz Parys",
+    "url": "https://github.com/dariuszparys"
+  },
+  "license": "MIT",
+  "keywords": ["azure-devops", "azure-boards", "pbi", "work-items", "wiql"]
+}

@@ -1,0 +1,33 @@
+{
+  "name": "claudecode-enhancements",
+  "owner": {
+    "name": "Dariusz Parys",
+    "url": "https://github.com/dariuszparys"
+  },
+  "plugins": [
+    {
+      "name": "work-items",
+      "source": "./plugins/work-items",
+      "description": "Analyze, optimize, and break down work items for LLM-assisted development",
+      "version": "1.0.0"
+    },
+    {
+      "name": "dp-tools",
+      "source": "./plugins/dp-tools",
+      "description": "Tools for creating CLAUDE.md files and Claude Code rules",
+      "version": "1.0.0"
+    },
+    {
+      "name": "azure-boards",
+      "source": "./plugins/azure-boards",
+      "description": "Azure DevOps Boards integration with az boards CLI",
+      "version": "1.0.0"
+    },
+    {
+      "name": "adr",
+      "source": "./plugins/adr",
+      "description": "Architecture Decision Records: create ADRs, suggest documenting decisions, auto-lint and regenerate index",
+      "version": "1.0.0"
+    }
+  ]
+}
