@@ -1,6 +1,7 @@
 ---
 name: azure-boards
 description: Work with Azure DevOps Product Backlog Items using az boards CLI
+user-invocable: false
 when_to_use: |
   Use this skill when the user:
   - Mentions Azure DevOps, Azure Boards, or PBI

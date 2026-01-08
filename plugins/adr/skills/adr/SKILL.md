@@ -1,6 +1,7 @@
 ---
 name: adr
 description: Suggest documenting significant architectural decisions as ADRs
+user-invocable: false
 when_to_use: |
   Use this skill when the conversation involves:
   - Introducing a new architectural pattern, layer, or abstraction

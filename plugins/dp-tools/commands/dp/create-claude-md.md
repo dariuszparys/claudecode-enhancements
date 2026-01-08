@@ -1,6 +1,16 @@
 ---
-allowed-tools: Bash(find:*), Bash(tree:*), Bash(cat:*), Bash(head:*), Bash(wc:*), Bash(git rev-parse:*), Bash(pwd:*), Read, Write, Edit
 description: Generate or update CLAUDE.md following best practices (concise, progressive disclosure, no linter duties)
+allowed-tools:
+  - Bash(find:*)
+  - Bash(tree:*)
+  - Bash(cat:*)
+  - Bash(head:*)
+  - Bash(wc:*)
+  - Bash(git rev-parse:*)
+  - Bash(pwd:*)
+  - Read
+  - Write
+  - Edit
 ---
 
 # Task: Create/Update CLAUDE.md

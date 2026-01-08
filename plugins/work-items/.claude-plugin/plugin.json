@@ -1,6 +1,6 @@
 {
   "name": "work-items",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Analyze, optimize, and break down work items for LLM-assisted development",
   "author": {
     "name": "Dariusz Parys",

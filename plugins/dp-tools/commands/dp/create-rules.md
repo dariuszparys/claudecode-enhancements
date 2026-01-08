@@ -1,6 +1,16 @@
 ---
-allowed-tools: Bash(find:*), Bash(tree:*), Bash(ls:*), Bash(git rev-parse:*), Bash(pwd:*), Read, Write, Edit, Glob, Grep
 description: Create modular Claude Code rules files in .claude/rules/
+allowed-tools:
+  - Bash(find:*)
+  - Bash(tree:*)
+  - Bash(ls:*)
+  - Bash(git rev-parse:*)
+  - Bash(pwd:*)
+  - Read
+  - Write
+  - Edit
+  - Glob
+  - Grep
 ---
 
 # Task: Create Claude Code Rules

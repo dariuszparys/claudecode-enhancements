@@ -1,6 +1,10 @@
 ---
-allowed-tools: Bash(find:*), Bash(ls:*), Read, Write
 description: Create a new Architecture Decision Record using the standard MADR template
+allowed-tools:
+  - Bash(find:*)
+  - Bash(ls:*)
+  - Read
+  - Write
 ---
 
 # Task: Create New ADR

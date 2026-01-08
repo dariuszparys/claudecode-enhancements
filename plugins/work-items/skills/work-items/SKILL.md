@@ -1,6 +1,7 @@
 ---
 name: work-items
 description: Optimize and analyze work items for LLM-assisted development
+user-invocable: false
 when_to_use: |
   Use this skill when the user:
   - Pastes a work item, issue, or ticket from any system
