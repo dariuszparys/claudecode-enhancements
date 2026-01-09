@@ -3,11 +3,14 @@ name: azure-boards
 description: Work with Azure DevOps Product Backlog Items using az boards CLI
 user-invocable: false
 when_to_use: |
-  Use this skill when the user:
-  - Mentions Azure DevOps, Azure Boards, or PBI
-  - Provides a work item ID to fetch or update
-  - Asks about sprint work or iteration paths
-  - Needs WIQL queries for Azure DevOps
+  Use this skill when:
+  - Fetching a work item by ID (e.g., "get PBI 12345", "show me work item #6789")
+  - Updating Azure DevOps fields like Description, Acceptance Criteria, or State
+  - Querying work items with WIQL (e.g., "what's assigned to me", "sprint items")
+  - Creating tasks under a Product Backlog Item or Bug
+  - Parsing HTML-formatted fields from Azure DevOps responses
+  - Working with iteration paths, area paths, or sprint planning
+  - Using `az boards` CLI commands for any Azure DevOps operation
 ---
 
 # Azure Boards Skill

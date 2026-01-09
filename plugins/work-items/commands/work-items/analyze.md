@@ -1,5 +1,9 @@
 ---
 description: Analyze a work item to determine if it's ready for development
+argument-hint: "<url|path|paste>"
+allowed-tools:
+  - Read
+  - WebFetch
 ---
 
 Analyze a work item (GitHub Issue, Jira ticket, Azure DevOps PBI, etc.) for development readiness.
@@ -55,3 +59,8 @@ Provide a structured analysis:
 ### Summary
 One sentence summarizing the work item readiness.
 ```
+
+## Related Commands
+
+- `/work-items:optimize` — Transform to LLM-optimized format for efficient context usage
+- `/work-items:tasks` — Generate implementation task breakdown

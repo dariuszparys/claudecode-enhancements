@@ -1,5 +1,6 @@
 ---
 description: Create modular Claude Code rules files in .claude/rules/
+argument-hint: "[topic]"
 allowed-tools:
   - Bash(find:*)
   - Bash(tree:*)

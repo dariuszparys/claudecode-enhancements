@@ -1,5 +1,9 @@
 ---
 description: Generate implementation tasks from a work item
+argument-hint: "<url|path|paste>"
+allowed-tools:
+  - Read
+  - WebFetch
 ---
 
 Generate a task breakdown from a work item, optimized for sequential Claude Code execution.
@@ -130,3 +134,8 @@ Switch Container Apps to internal ingress with Front Door Private Link. 4 tasks.
 - `curl https://<frontdoor-url>` -> expect 200
 - Portal: Private Link = "Approved"
 ```
+
+## Related Commands
+
+- `/work-items:analyze` — Check if work item is ready for development first
+- `/work-items:optimize` — Transform to LLM-optimized format (recommended input for this command)

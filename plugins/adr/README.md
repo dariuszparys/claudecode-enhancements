@@ -45,6 +45,12 @@ The plugin adds two `PostToolUse` hooks:
 
 ## Prerequisites
 
+### System Requirements
+
+The hooks require Unix tools (`jq`, `grep`, `sed`) available on macOS and Linux. On Windows, use WSL or Git Bash.
+
+### Node.js Dependencies
+
 Add these to your project's `package.json`:
 
 ```json

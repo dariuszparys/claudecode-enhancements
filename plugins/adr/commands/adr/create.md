@@ -1,5 +1,6 @@
 ---
 description: Create a new Architecture Decision Record using the standard MADR template
+argument-hint: "[decision topic]"
 allowed-tools:
   - Bash(find:*)
   - Bash(ls:*)

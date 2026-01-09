@@ -1,6 +1,6 @@
 {
   "name": "azure-boards",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Azure DevOps Boards integration with az boards CLI for work item management",
   "author": {
     "name": "Dariusz Parys",

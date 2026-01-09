@@ -1,5 +1,9 @@
 ---
 description: Transform a work item into LLM-optimized format for efficient context usage
+argument-hint: "<url|path|paste>"
+allowed-tools:
+  - Read
+  - WebFetch
 ---
 
 Transform a work item into a token-efficient format optimized for LLM context windows.
@@ -123,3 +127,8 @@ Container Apps -> internal ingress. External traffic via Front Door + Private Li
 - Front Door URL -> 200
 - Private Link status = Approved
 ```
+
+## Related Commands
+
+- `/work-items:analyze` — Check if work item is ready for development first
+- `/work-items:tasks` — Generate implementation task breakdown from optimized format

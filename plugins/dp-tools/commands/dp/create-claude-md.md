@@ -1,5 +1,6 @@
 ---
 description: Generate or update CLAUDE.md following best practices (concise, progressive disclosure, no linter duties)
+argument-hint: "[path]"
 allowed-tools:
   - Bash(find:*)
   - Bash(tree:*)
