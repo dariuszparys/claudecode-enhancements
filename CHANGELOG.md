@@ -7,8 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
-### Added
-- Rule requiring CHANGELOG.md update on version bumps
+## [2.0.0] - 2026-01-10
+
+### Changed
+- **BREAKING**: Flatten plugin namespace structure - commands now at `plugins/<name>/commands/<cmd>.md` instead of `plugins/<name>/commands/<namespace>/<cmd>.md`
+- **BREAKING**: Command invocation simplified from `/plugin:namespace:command` to `/plugin:command`
+  - `/adr:adr:create` → `/adr:create`
+  - `/dp-tools:dp:create-rules` → `/dp-tools:create-rules`
+  - `/dp-tools:dp:create-claude-md` → `/dp-tools:create-claude-md`
+  - `/work-items:work-items:analyze` → `/work-items:analyze`
+  - `/work-items:work-items:optimize` → `/work-items:optimize`
+  - `/work-items:work-items:tasks` → `/work-items:tasks`
+- Skills now at `plugins/<name>/skills/SKILL.md` (removed namespace subdirectory)
 
 ## [1.2.0] - 2026-01-09
 

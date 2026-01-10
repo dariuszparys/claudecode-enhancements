@@ -16,9 +16,10 @@ Claude Code plugin marketplace with custom commands, skills, and hooks.
 - `tree -L 3 plugins/` — View plugin structure
 
 ## Rules
-- Commands: `plugins/<name>/commands/<namespace>/<cmd>.md` with YAML frontmatter
+- Commands: `plugins/<name>/commands/<cmd>.md` with YAML frontmatter
   - Frontmatter supports: `description`, `argument-hint`, `allowed-tools`
-- Skills: `plugins/<name>/skills/<namespace>/SKILL.md`
+  - Use subdirectories only for logical grouping (e.g., `commands/deploy/rollout.md`)
+- Skills: `plugins/<name>/skills/SKILL.md`
 - Hooks: Defined in `plugin.json` under `hooks` key
   - Use regex matchers (e.g., `Edit|Write`)
   - Scripts use `${CLAUDE_PLUGIN_ROOT}` for plugin-relative paths
@@ -29,7 +30,7 @@ Claude Code plugin marketplace with custom commands, skills, and hooks.
 
 ## Domain
 - **Plugin**: Package containing commands, skills, and/or hooks
-- **Command**: Markdown file invoked via `/namespace:command`
+- **Command**: Markdown file invoked via `/plugin:command`
 - **Skill**: Auto-invoked behavior in `SKILL.md`
 - **Hook**: Shell command triggered by tool events (PostToolUse, etc.)
 - **Marketplace**: Repo with `.claude-plugin/marketplace.json` listing plugins
